@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "gpumemleakfix",
+  "version": "${version}",
+
+  "name": "Gpu memory leak fix mod",
+  "description": "",
+  "authors": [
+    ""
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "ARR",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.gpumemleakfix.Gpumemleakfix"
+    ],
+    "client": [
+      "com.gpumemleakfix.GpumemleakfixClient"
+    ]
+  },
+  "mixins": [
+    "gpumemleakfix.mixins.json"
+  ],
+  "accessWidener": "gpumemleakfix.accessWidener",
+  "depends": {
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
