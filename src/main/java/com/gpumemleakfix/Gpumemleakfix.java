@@ -1,7 +1,7 @@
-package com.template;
+package com.gpumemleakfix;
 
-import com.template.config.Configuration;
-import com.template.event.EventHandler;
+import com.gpumemleakfix.config.Configuration;
+import com.gpumemleakfix.event.EventHandler;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -14,18 +14,22 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
-import static com.template.TemplateMod.MOD_ID;
+import static com.gpumemleakfix.Gpumemleakfix.MOD_ID;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MOD_ID)
-public class TemplateMod
+public class Gpumemleakfix
 {
-    public static final String        MOD_ID = "template";
+    public static final String        MOD_ID = "gpumemleakfix";
     public static final Logger        LOGGER = LogManager.getLogger();
     private static      Configuration config = null;
     public static       Random        rand   = new Random();
 
-    public TemplateMod()
+    // GL_OUT_OF_MEMORY
+    // GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+    // GL_INVALID_FRAMEBUFFER_OPERATION
+
+    public Gpumemleakfix()
     {
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "", (a, b) -> true));
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(EventHandler.class);
@@ -37,7 +41,7 @@ public class TemplateMod
     public void clientSetup(FMLClientSetupEvent event)
     {
         // Side safe client event handler
-        TemplateClient.onInitializeClient(event);
+        GpumemleakfixClient.onInitializeClient(event);
     }
 
     private void setup(final FMLCommonSetupEvent event)

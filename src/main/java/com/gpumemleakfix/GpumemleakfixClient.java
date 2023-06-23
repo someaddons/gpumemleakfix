@@ -1,10 +1,10 @@
-package com.template;
+package com.gpumemleakfix;
 
-import com.template.event.ClientEventHandler;
+import com.gpumemleakfix.event.ClientEventHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-public class TemplateClient
+public class GpumemleakfixClient
 {
     public static void onInitializeClient(final FMLClientSetupEvent event)
     {

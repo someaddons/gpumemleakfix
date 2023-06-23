@@ -1,11 +1,12 @@
 {
   "required": false,
-  "package": "com.template.mixin",
+  "package": "com.gpumemleakfix.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "template.refmap.json",
+  "refmap": "gpumemleakfix.refmap.json",
   "mixins": [
   ],
   "client": [
+    "RenderTargetMixin"
   ],
   "injectors": {
     "defaultRequire": 1

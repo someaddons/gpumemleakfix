@@ -1,16 +1,19 @@
-package com.template.config;
+package com.gpumemleakfix.config;
 
 import com.google.gson.JsonObject;
-import com.template.TemplateMod;
+import com.gpumemleakfix.Gpumemleakfix;
 
-public class CommonConfiguration {
+public class CommonConfiguration
+{
 
     public boolean skipWeatherOnSleep = false;
 
-    protected CommonConfiguration() {
+    protected CommonConfiguration()
+    {
     }
 
-    public JsonObject serialize() {
+    public JsonObject serialize()
+    {
         final JsonObject root = new JsonObject();
 
         final JsonObject entry = new JsonObject();
@@ -21,9 +24,11 @@ public class CommonConfiguration {
         return root;
     }
 
-    public void deserialize(JsonObject data) {
-        if (data == null) {
-            TemplateMod.LOGGER.error("Config file was empty!");
+    public void deserialize(JsonObject data)
+    {
+        if (data == null)
+        {
+            Gpumemleakfix.LOGGER.error("Config file was empty!");
             return;
         }
 

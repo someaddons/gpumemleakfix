@@ -1,4 +1,4 @@
-package com.template.event;
+package com.gpumemleakfix.event;
 
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
