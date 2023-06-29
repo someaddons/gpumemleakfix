@@ -2,8 +2,6 @@ package com.gpumemleakfix.event;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.TextureUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Vec3i;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -19,16 +17,8 @@ public class ClientEventHandler {
         while (!queue.isEmpty() && counter++ < 20) {
             if (!done) {
                 // Unbindread Unbindwrite as RenderTarget
-                RenderSystem.assertOnRenderThreadOrInit();
                 GlStateManager._bindTexture(0);
-
-                if (!RenderSystem.isOnRenderThread()) {
-                    RenderSystem.recordRenderCall(() -> {
-                        GlStateManager._glBindFramebuffer(36160, 0);
-                    });
-                } else {
-                    GlStateManager._glBindFramebuffer(36160, 0);
-                }
+                GlStateManager._glBindFramebuffer(36160, 0);
 
                 done = true;
             }
