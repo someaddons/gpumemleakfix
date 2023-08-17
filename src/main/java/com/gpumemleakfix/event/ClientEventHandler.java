@@ -10,6 +10,9 @@ public class ClientEventHandler {
 
     public static ConcurrentLinkedQueue<Vec3i> queue = new ConcurrentLinkedQueue<>();
 
+    /**
+     * Checks on tick for leaked adresses and cleans them up
+     */
     public static void onCLientTick() {
         boolean done = false;
 
