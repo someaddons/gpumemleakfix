@@ -31,7 +31,7 @@ public abstract class RenderTargetMixin
         }
         catch (Throwable t)
         {
-            Gpumemleakfix.LOGGER.error("Error during finalize:", t);
+            Gpumemleakfix.LOGGER.error("Error during render target finalize:", t);
         }
         finally
         {
