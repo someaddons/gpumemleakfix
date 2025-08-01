@@ -9,7 +9,7 @@ var ENV = System.getenv()
 if (ENV.MCMC_BUILD_NUMBER) {
     version = "${mod_version}.${ENV.MCMC_BUILD_NUMBER}"
 } else {
-    version = project.minecraft_version + "-" + project.mod_version
+    version = "1.21.5-8" + "-" + project.mod_version
 }
 
 group = project.maven_group
@@ -36,7 +36,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation("curse.maven:cupboard-326652:5477517")
+    modImplementation("curse.maven:cupboard-326652:6836458")
 
 }
 
@@ -79,12 +79,5 @@ publishing {
         register('mavenJava', MavenPublication) {
             artifact jar
         }
-    }
-}
-
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
     }
 }

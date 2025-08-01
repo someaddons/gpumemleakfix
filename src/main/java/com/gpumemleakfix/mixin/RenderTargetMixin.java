@@ -3,30 +3,31 @@ package com.gpumemleakfix.mixin;
 import com.gpumemleakfix.Gpumemleakfix;
 import com.gpumemleakfix.event.ClientEventHandler;
 import com.mojang.blaze3d.pipeline.RenderTarget;
-import net.minecraft.core.Vec3i;
+import com.mojang.blaze3d.textures.GpuTexture;
+import net.minecraft.util.Tuple;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(value = RenderTarget.class, remap = false)
 public abstract class RenderTargetMixin
 {
-    @Shadow(remap = true)
-    protected int depthBufferId;
+    @Shadow
+    @Nullable
+    protected GpuTexture colorTexture;
 
-    @Shadow(remap = true)
-    protected int colorTextureId;
-
-    @Shadow(remap = true)
-    public int frameBufferId;
+    @Shadow
+    @Nullable
+    protected GpuTexture depthTexture;
 
     @Override
     public void finalize() throws Throwable
     {
         try
         {
-            if (this.depthBufferId > -1 || this.colorTextureId > -1 || this.frameBufferId > -1)
+            if (this.colorTexture != null || this.depthTexture != null)
             {
-                ClientEventHandler.queue.add(new Vec3i(depthBufferId, colorTextureId, frameBufferId));
+                ClientEventHandler.queue.add(new Tuple<>(colorTexture, depthTexture));
             }
         }
         catch (Throwable t)
