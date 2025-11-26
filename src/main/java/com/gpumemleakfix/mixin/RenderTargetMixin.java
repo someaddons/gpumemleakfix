@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(value = RenderTarget.class, remap = false)
 public abstract class RenderTargetMixin
 {
-    @Shadow
+    @Shadow(remap = true)
     @Nullable
     protected GpuTexture colorTexture;
 
-    @Shadow
+    @Shadow(remap = true)
     @Nullable
     protected GpuTexture depthTexture;
 
