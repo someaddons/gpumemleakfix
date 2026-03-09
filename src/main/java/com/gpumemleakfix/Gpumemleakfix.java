@@ -24,7 +24,6 @@ public class Gpumemleakfix
 
     public Gpumemleakfix(IEventBus modEventBus, ModContainer modContainer)
     {
-        modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
     }
 
@@ -33,10 +32,5 @@ public class Gpumemleakfix
     {
         // Side safe client event handler
         GpumemleakfixClient.onInitializeClient(event);
-    }
-
-    private void setup(final FMLCommonSetupEvent event)
-    {
-        LOGGER.info(MOD_ID + " mod initialized");
     }
 }
