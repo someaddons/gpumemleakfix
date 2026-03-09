@@ -1,13 +1,13 @@
 package com.gpumemleakfix.event;
+import com.gpumemleakfix.Gpumemleakfix;
 
-import com.mojang.blaze3d.textures.GpuTexture;
-import net.minecraft.util.Tuple;
-
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class ClientEventHandler {
+public class ClientEventHandler
+{
 
-    public static ConcurrentLinkedQueue<Tuple<GpuTexture, GpuTexture>> queue = new ConcurrentLinkedQueue<>();
+    public static ConcurrentLinkedQueue<List<AutoCloseable>> queue = new ConcurrentLinkedQueue<>();
 
     /**
      * Checks on tick for leaked adresses and cleans them up
@@ -16,14 +16,16 @@ public class ClientEventHandler {
         int counter = 0;
         while (!queue.isEmpty() && counter++ < 20) {
             // destroybuffer from Rendertarget
-            final Tuple<GpuTexture, GpuTexture> ids = queue.poll();
-            if (ids != null) {
-                if (ids.getA() != null) {
-                    ids.getA().close();
+            final List<AutoCloseable> textures = queue.poll();
+            for (final AutoCloseable closeable : textures)
+            {
+                try
+                {
+                    closeable.close();
                 }
-
-                if (ids.getB() != null) {
-                    ids.getB().close();
+                catch (Exception e)
+                {
+                    Gpumemleakfix.LOGGER.warn("Failed to close texture: "+closeable, e);
                 }
             }
         }
